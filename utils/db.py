@@ -17,8 +17,6 @@ def init_db():
     senior_name TEXT,
     start_date TEXT,
     end_date TEXT,
-    start_time TEXT,
-    end_time TEXT,
     status TEXT
 )
     """)
