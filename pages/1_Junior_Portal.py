@@ -43,9 +43,8 @@ project_description = st.text_area(
     "Project Description"
 )
 
-project_type = st.selectbox(
-    "Project Type",
-    PROJECT_TYPES
+project_type = st.text_input(
+    "Project / Task Name"
 )
 
 priority = st.selectbox(
