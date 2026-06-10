@@ -1,13 +1,17 @@
 import streamlit as st
 import sqlite3
 import pandas as pd
-password = st.text_input(
+import streamlit as st
+
+PASSWORD = "Kent@2026"
+
+entered_password = st.text_input(
     "Senior Access Password",
     type="password"
 )
 
-if password != "Kent@2026":
-    st.warning("Unauthorized Access")
+if entered_password != PASSWORD:
+    st.warning("Senior Login Required")
     st.stop()
 st.title("Senior Approval Portal")
 
