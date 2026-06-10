@@ -3,6 +3,9 @@ from utils.db import init_db
 
 init_db()
 
+st.write("Database Recreated")
+init_db()
+
 st.set_page_config(
     page_title="ByeMicroManagers",
     page_icon="⚡",
