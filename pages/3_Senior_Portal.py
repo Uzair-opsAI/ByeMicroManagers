@@ -43,10 +43,6 @@ else:
         )
 
         st.write(
-            f"Priority: {row['priority']}"
-        )
-
-        st.write(
             f"Senior: {row['senior_name']}"
         )
 
