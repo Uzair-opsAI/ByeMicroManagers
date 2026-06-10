@@ -46,4 +46,19 @@ st.divider()
 
 st.subheader("All Requests")
 
-st.dataframe(df)
+st.subheader("Resource Overview")
+
+st.dataframe(
+    df[
+        [
+            "employee_name",
+            "project_code",
+            "project_type",
+            "priority",
+            "senior_name",
+            "start_date",
+            "end_date",
+            "status"
+        ]
+    ]
+)
