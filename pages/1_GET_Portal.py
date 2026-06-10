@@ -37,11 +37,6 @@ task_name = st.text_area(
     "Task Assigned"
 )
 
-priority = st.selectbox(
-    "Priority",
-    ["Low","Medium","High","Critical"]
-)
-
 senior_name = st.selectbox(
     "Assigned By",
     SENIORS
@@ -62,15 +57,7 @@ end_date = st.date_input(
     "End Date"
 )
 
-start_time = st.time_input(
-    "Start Time"
-)
-
-end_time = st.time_input(
-    "End Time"
-)
-
-if st.button("Submit GET Assignment"):
+if st.button("Submit Task"):
 
     conn = sqlite3.connect("tracker.db")
 
@@ -83,13 +70,10 @@ if st.button("Submit GET Assignment"):
         employee_type,
         project_code,
         project_description,
-        priority,
         senior_name,
         approx_duration,
         start_date,
         end_date,
-        start_time,
-        end_time,
         status
     )
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
@@ -99,13 +83,10 @@ if st.button("Submit GET Assignment"):
         "GET",
         project_code,
         task_name,
-        priority,
         senior_name,
         approx_duration,
         str(start_date),
         str(end_date),
-        str(start_time),
-        str(end_time),
         "Pending"
     ))
 
