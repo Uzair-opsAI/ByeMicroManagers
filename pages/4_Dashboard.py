@@ -22,13 +22,17 @@ df = pd.read_sql_query(
 
 conn.close()
 
-busy = len(
-    df[df["status"] == "Approved"]
-)
+approved_employees = []
 
-available = len(
-    df[df["status"] == "Rejected"]
-)
+if not df.empty:
+
+    approved_employees = df[
+        df["status"] == "Approved"
+    ]["employee_name"].unique().tolist()
+
+busy = len(approved_employees)
+
+available = len(ALL_EMPLOYEES) - busy
 
 pending = len(
     df[df["status"] == "Pending"]
