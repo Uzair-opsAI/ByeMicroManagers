@@ -62,7 +62,11 @@ if st.button("Submit Task"):
     conn = sqlite3.connect("tracker.db")
 
     cursor = conn.cursor()
-
+    cursor.execute("PRAGMA table_info(assignments)")
+    columns = cursor.fetchall()
+    
+    st.write("Current Database Columns:")
+    st.write(columns)
     cursor.execute("""
     INSERT INTO assignments
     (
