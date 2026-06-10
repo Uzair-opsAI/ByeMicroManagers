@@ -65,14 +65,17 @@ st.dataframe(
     df[
         [
             "employee_name",
+            "employee_type",
             "project_code",
-            "project_type",
+            "project_description",
             "senior_name",
+            "approx_duration",
             "start_date",
             "end_date",
             "status"
         ]
-    ]
+    ],
+    use_container_width=True
 )
 st.divider()
 
