@@ -51,11 +51,6 @@ SENIORS = [
     "Parth Shah",
 ]
 
-employee_name = st.selectbox(
-    "Employee Name",
-    EMPLOYEES
-)
-
 project_code = st.text_input(
     "Project Code"
 )
