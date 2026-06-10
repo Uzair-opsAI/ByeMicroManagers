@@ -1,7 +1,16 @@
 import streamlit as st
 import sqlite3
 import pandas as pd
-
+from datetime import datetime, timedelta
+ALL_EMPLOYEES = [
+    "Uzair Saiyed",
+    "Kaif Qureshi",
+    "Jaimin Prajapati",
+    "Nayaabshaad Ansari",
+    "Nandini Jadav",
+    "Parvej Meman",
+    "Chaitrang Prabhu"
+]
 st.title("Management Dashboard")
 
 conn = sqlite3.connect("tracker.db")
@@ -61,4 +70,32 @@ st.dataframe(
             "status"
         ]
     ]
+)
+st.divider()
+
+st.subheader("Weekly Availability Matrix")
+days = [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri"
+]
+availability_data = []
+for employee in ALL_EMPLOYEES:
+
+    row = {
+        "Employee": employee
+    }
+
+    for day in days:
+        row[day] = "🟢"
+
+    availability_data.append(row)
+    availability_df = pd.DataFrame(
+    availability_data
+)
+    st.dataframe(
+    availability_df,
+    use_container_width=True
 )
