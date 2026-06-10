@@ -5,16 +5,37 @@ from datetime import date
 st.title("Junior Portal")
 
 EMPLOYEES = [
-    "Uzair Saiyed",
+  "Uzair Saiyed",
+  "Kaif Qureshi",
+  "Jaimin Prajapati",
+  "Nayaabshaad Ansari",
+  "Nandini Jadav",
+  "Parvej Meman",
+  "Chaitrang Prabhu"
+]
+employee_name = st.selectbox(
+    "Employee Name",
+    EMPLOYEES
+)
+
+SPECIAL_EMPLOYEES = [
     "Nayaabshaad Ansari",
-    "Parvej Meman",
     "Nandini Jadav",
-    "Chaitrang Prabhu",
-    "Kaif Qureshi",
-    "Jaimin Prajapati",
-    "Alisha Arora",
+    "Parvej Meman",
+    "Chaitrang Prabhu"
 ]
 
+work_hours_assigned = "Not Applicable"
+
+if employee_name in SPECIAL_EMPLOYEES:
+
+    work_hours_assigned = st.selectbox(
+        "Have Work Hours Been Assigned?",
+        [
+            "Yes",
+            "No"
+        ]
+    )
 SENIORS = [
     "VineetKumar Sandil",
     "Nilay Patel",
