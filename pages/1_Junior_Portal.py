@@ -1,10 +1,38 @@
 import streamlit as st
 import sqlite3
+from datetime import date
 
 st.title("Junior Portal")
 
-employee_name = st.text_input(
-    "Employee Name"
+EMPLOYEES = [
+    "Uzair Saiyed",
+    "Nayaabshaad Ansari",
+    "Parvej Meman",
+    "Nandini Jadav",
+    "Chaitrang Prabhu",
+    "Kaif Qureshi",
+    "Jaimin Prajapati",
+    "Alisha Arora",
+]
+
+SENIORS = [
+    "VineetKumar Sandil",
+    "Nilay Patel",
+    "Viral Shah",
+    "Sameer Jain",
+    "Chandresh Salakiya",
+    "Ramesh Prajapati",
+    "Hardik Gohil",
+    "Kamlesh Prajapati",
+    "Rintu Midday",
+    "Nakul Bhatt",
+    "Kaustubh Soman",
+    "Parth Shah",
+]
+
+employee_name = st.selectbox(
+    "Employee Name",
+    EMPLOYEES
 )
 
 project_code = st.text_input(
@@ -15,18 +43,35 @@ project_description = st.text_area(
     "Project Description"
 )
 
+project_type = st.selectbox(
+    "Project Type",
+    PROJECT_TYPES
+)
+
 priority = st.selectbox(
     "Priority",
-    ["Low", "Medium", "High", "Critical"]
+    ["Low","Medium","High","Critical"]
 )
 
 senior_name = st.selectbox(
     "Senior Responsible",
-    [
-        "Senior A",
-        "Senior B",
-        "Senior C"
-    ]
+    SENIORS
+)
+
+start_date = st.date_input(
+    "Start Date"
+)
+
+end_date = st.date_input(
+    "End Date"
+)
+
+start_time = st.time_input(
+    "Start Time"
+)
+
+end_time = st.time_input(
+    "End Time"
 )
 
 if st.button("Submit Request"):
@@ -41,18 +86,28 @@ if st.button("Submit Request"):
         employee_name,
         project_code,
         project_description,
+        project_type,
         priority,
         senior_name,
+        start_date,
+        end_date,
+        start_time,
+        end_time,
         status
     )
-    VALUES (?,?,?,?,?,?)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?)
     """,
     (
         employee_name,
         project_code,
         project_description,
+        project_type,
         priority,
         senior_name,
+        str(start_date),
+        str(end_date),
+        str(start_time),
+        str(end_time),
         "Pending"
     ))
 
