@@ -5,10 +5,8 @@ def init_db():
     conn = sqlite3.connect("tracker.db")
     cursor = conn.cursor()
 
-    cursor.execute("DROP TABLE IF EXISTS assignments")
-
     cursor.execute("""
-    CREATE TABLE assignments (
+    CREATE TABLE IF NOT EXISTS assignments (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         employee_name TEXT,
         employee_type TEXT,
