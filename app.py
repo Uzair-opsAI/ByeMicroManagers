@@ -1,4 +1,7 @@
 import streamlit as st
+from utils.db import init_db
+
+init_db()
 
 st.set_page_config(
     page_title="ByeMicroManagers",
@@ -8,6 +11,10 @@ st.set_page_config(
 
 st.title("⚡ ByeMicroManagers")
 
-st.subheader("Electrical Engineering Resource Tracker")
+st.subheader(
+    "Electrical Engineering Resource Tracker"
+)
 
-st.success("Application Successfully Deployed")
+st.info(
+    "Use the menu on the left to access Junior Portal, Senior Portal and Dashboard."
+)
