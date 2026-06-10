@@ -67,7 +67,6 @@ st.dataframe(
             "employee_name",
             "project_code",
             "project_type",
-            "priority",
             "senior_name",
             "start_date",
             "end_date",
