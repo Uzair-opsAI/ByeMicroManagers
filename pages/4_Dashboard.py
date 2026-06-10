@@ -82,6 +82,7 @@ days = [
     "Fri"
 ]
 availability_data = []
+
 for employee in ALL_EMPLOYEES:
 
     row = {
@@ -92,10 +93,14 @@ for employee in ALL_EMPLOYEES:
         row[day] = "🟢"
 
     availability_data.append(row)
-    availability_df = pd.DataFrame(
+
+# LOOP ENDS HERE
+
+availability_df = pd.DataFrame(
     availability_data
 )
-    st.dataframe(
+
+st.dataframe(
     availability_df,
     use_container_width=True
 )
