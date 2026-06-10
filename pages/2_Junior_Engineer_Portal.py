@@ -1,5 +1,8 @@
 import streamlit as st
 import sqlite3
+from utils.db import init_db
+
+init_db()
 
 st.title("Junior Engineer Portal")
 
