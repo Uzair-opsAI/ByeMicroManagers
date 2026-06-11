@@ -161,7 +161,7 @@ for employee in ALL_EMPLOYEES:
     # Default = Available
     for date_obj in week_dates:
 
-        column_name = date_obj.strftime("%d-%b")
+        column_name = date_obj.strftime("%a %d-%b")
 
         row[column_name] = "🟢"
 
@@ -192,7 +192,7 @@ for employee in ALL_EMPLOYEES:
 
                     if start_date <= date_obj <= end_date:
 
-                        column_name = date_obj.strftime("%d-%b")
+                        column_name = date_obj.strftime("%a %d-%b")
 
                         row[column_name] = "🔴"
 
