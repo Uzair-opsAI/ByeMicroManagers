@@ -5,6 +5,8 @@ st.title("GET Portal")
 GETS = [
     "Uzair Saiyed",
     "Kaif Qureshi",
+    "Alisha Arora",
+    "Karan Khetani",
     "Jaimin Prajapati"
 ]
 
