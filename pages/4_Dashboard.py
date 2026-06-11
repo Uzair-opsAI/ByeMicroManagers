@@ -94,6 +94,10 @@ col3.metric(
 # RESOURCE OVERVIEW
 # =========================
 
+# =========================
+# RESOURCE OVERVIEW
+# =========================
+
 st.divider()
 
 st.subheader("Resource Overview")
@@ -101,28 +105,28 @@ st.subheader("Resource Overview")
 if not df.empty:
 
     resource_df = df[
-    [
-        "employee_name",
-        "employee_type",
-        "project_code",
-        "project_description",
-        "senior_name",
-        "approx_duration",
-        "start_date",
-        "end_date",
-        "status"
+        [
+            "employee_name",
+            "employee_type",
+            "project_code",
+            "project_description",
+            "senior_name",
+            "approx_duration",
+            "start_date",
+            "end_date",
+            "status"
+        ]
     ]
-]
 
-resource_df.index = range(
-    1,
-    len(resource_df) + 1
-)
+    resource_df.index = range(
+        1,
+        len(resource_df) + 1
+    )
 
-st.dataframe(
-    resource_df,
-    use_container_width=True
-)
+    st.dataframe(
+        resource_df,
+        use_container_width=True
+    )
 
 else:
 
