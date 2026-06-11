@@ -1,26 +1,15 @@
 import streamlit as st
-import gspread
+from utils.google_sheet import sheet
 
-from google.oauth2.service_account import Credentials
+st.title("Google Sheets Debug")
 
-SCOPES = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive"
-]
+records = sheet.get_all_records()
 
-creds = Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=SCOPES
-)
+st.write("Records:")
+st.write(records)
 
-client = gspread.authorize(creds)
+st.write("Row 1:")
+st.write(sheet.row_values(1))
 
-sheet = client.open(
-    "Engineering Resource Tracker"
-).worksheet(
-    "Assignments"
-)
-
-def add_assignment(data):
-
-    sheet.append_row(data)
+st.write("All Values:")
+st.write(sheet.get_all_values())
