@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.google_sheet import add_assignment
+
 st.title("GET Portal")
 
 GETS = [
@@ -60,25 +61,19 @@ end_date = st.date_input(
 
 if st.button("Submit Task"):
 
-    conn = sqlite3.connect("tracker.db")
-
     add_assignment(
-    [
-        employee_name,
-        "GET",
-        "",
-        project_code,
-        task_name,
-        senior_name,
-        approx_duration,
-        str(start_date),
-        str(end_date),
-        "Pending"
-    ]
-)
-
-st.success(
-    "Assignment Submitted"
-)
+        [
+            employee_name,
+            "GET",
+            "",
+            project_code,
+            task_name,
+            senior_name,
+            approx_duration,
+            str(start_date),
+            str(end_date),
+            "Pending"
+        ]
+    )
 
     st.success("Assignment Submitted")
