@@ -20,3 +20,5 @@ sheet = client.open(
 ).worksheet(
     "Assignments"
 )
+def add_assignment(data):
+    sheet.append_row(data)
