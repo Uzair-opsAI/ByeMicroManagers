@@ -1,5 +1,5 @@
 import streamlit as st
-import sqlite3
+from utils.google_sheet import add_assignment
 
 st.title("Junior Engineer Portal")
 
@@ -68,40 +68,21 @@ end_date = st.date_input(
 
 if st.button("Submit Junior Assignment"):
 
-    conn = sqlite3.connect("tracker.db")
-
-    cursor = conn.cursor()
-
-    cursor.execute("""
-    INSERT INTO assignments
-    (
-        employee_name,
-        employee_type,
-        work_hours_assigned,
-        project_code,
-        project_description,
-        senior_name,
-        approx_duration,
-        start_date,
-        end_date,
-        status
+    add_assignment(
+        [
+            employee_name,
+            "Junior Engineer",
+            work_allocation_status,
+            project_code,
+            task_name,
+            senior_name,
+            approx_duration,
+            str(start_date),
+            str(end_date),
+            "Pending"
+        ]
     )
-    VALUES (?,?,?,?,?,?,?,?,?,?)
-    """,
-    (
-        employee_name,
-        "Junior Engineer",
-        work_allocation_status,
-        project_code,
-        task_name,
-        senior_name,
-        approx_duration,
-        str(start_date),
-        str(end_date),
-        "Pending"
-    ))
 
-    conn.commit()
-    conn.close()
-
-    st.success("Assignment Submitted")
+    st.success(
+        "Assignment Submitted"
+    )
