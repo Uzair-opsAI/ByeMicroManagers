@@ -1,5 +1,5 @@
 import streamlit as st
-import sqlite3
+from utils.google_sheet import add_assignment
 st.title("GET Portal")
 
 GETS = [
