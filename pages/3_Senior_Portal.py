@@ -1,7 +1,9 @@
 import streamlit as st
-import sqlite3
-import pandas as pd
-import streamlit as st
+
+from utils.google_sheet import (
+    get_assignments,
+    update_status
+)
 
 PASSWORD = "Kent@2026"
 
@@ -13,26 +15,30 @@ entered_password = st.text_input(
 if entered_password != PASSWORD:
     st.warning("Senior Login Required")
     st.stop()
+
 st.title("Senior Approval Portal")
 
-conn = sqlite3.connect("tracker.db")
-
-df = pd.read_sql_query(
-    "SELECT * FROM assignments",
-    conn
-)
+df = get_assignments()
 
 if len(df) == 0:
-    st.info("No requests submitted yet.")
+
+    st.info(
+        "No requests submitted yet."
+    )
 
 else:
 
-    pending_df = df[df["status"] == "Pending"]
+    pending_df = df[
+        df["status"] == "Pending"
+    ]
 
     if len(pending_df) == 0:
-        st.success("No pending requests.")
 
-    for _, row in pending_df.iterrows():
+        st.success(
+            "No pending requests."
+        )
+
+    for index, row in pending_df.iterrows():
 
         st.subheader(
             f"{row['employee_name']} | {row['project_code']}"
@@ -46,50 +52,46 @@ else:
             f"Senior: {row['senior_name']}"
         )
 
+        st.write(
+            f"Duration: {row['approx_duration']} Hours"
+        )
+
+        st.write(
+            f"Start: {row['start_date']}"
+        )
+
+        st.write(
+            f"End: {row['end_date']}"
+        )
+
         col1, col2 = st.columns(2)
+
+        google_sheet_row = index + 2
 
         with col1:
 
             if st.button(
-                f"Approve {row['id']}"
+                f"Approve_{index}"
             ):
 
-                cursor = conn.cursor()
-
-                cursor.execute(
-                    """
-                    UPDATE assignments
-                    SET status='Approved'
-                    WHERE id=?
-                    """,
-                    (row['id'],)
+                update_status(
+                    google_sheet_row,
+                    "Approved"
                 )
-
-                conn.commit()
 
                 st.rerun()
 
         with col2:
 
             if st.button(
-                f"Reject {row['id']}"
+                f"Reject_{index}"
             ):
 
-                cursor = conn.cursor()
-
-                cursor.execute(
-                    """
-                    UPDATE assignments
-                    SET status='Rejected'
-                    WHERE id=?
-                    """,
-                    (row['id'],)
+                update_status(
+                    google_sheet_row,
+                    "Rejected"
                 )
-
-                conn.commit()
 
                 st.rerun()
 
         st.divider()
-
-conn.close()
