@@ -24,7 +24,7 @@ st.title("Management Dashboard")
 # GOOGLE SHEETS
 
 df = get_assignments()
-
+st.write(df.columns.tolist())
 # =========================
 # DASHBOARD CARDS
 # =========================
