@@ -6,6 +6,8 @@ from datetime import datetime, timedelta
 ALL_EMPLOYEES = [
     "Uzair Saiyed",
     "Kaif Qureshi",
+    "Alisha Arora",
+    "Karan Khetani",
     "Jaimin Prajapati",
     "Nayaabshaad Ansari",
     "Nandini Jadav",
