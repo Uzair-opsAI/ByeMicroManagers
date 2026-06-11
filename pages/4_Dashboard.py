@@ -138,12 +138,14 @@ st.subheader("Weekly Availability Matrix")
 
 week_dates = []
 
-for i in range(5):
+current_date = today
 
-    week_dates.append(
-        today + timedelta(days=i)
-    )
+while len(week_dates) < 5:
 
+    if current_date.weekday() < 5:
+        week_dates.append(current_date)
+
+    current_date += timedelta(days=1)
 availability_data = []
 
 for employee in ALL_EMPLOYEES:
@@ -197,6 +199,11 @@ for employee in ALL_EMPLOYEES:
 
 availability_df = pd.DataFrame(
     availability_data
+)
+
+availability_df.index = range(
+    1,
+    len(availability_df) + 1
 )
 
 st.dataframe(
