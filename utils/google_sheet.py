@@ -1,5 +1,6 @@
 import streamlit as st
 import gspread
+import pandas as pd
 
 from google.oauth2.service_account import Credentials
 
@@ -20,5 +21,20 @@ sheet = client.open(
 ).worksheet(
     "Assignments"
 )
+
 def add_assignment(data):
     sheet.append_row(data)
+
+def get_assignments():
+
+    records = sheet.get_all_records()
+
+    return pd.DataFrame(records)
+
+def update_status(row_number, new_status):
+
+    sheet.update_cell(
+        row_number,
+        10,
+        new_status
+    )
