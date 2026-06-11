@@ -2,6 +2,7 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 from datetime import datetime, timedelta
+
 ALL_EMPLOYEES = [
     "Uzair Saiyed",
     "Kaif Qureshi",
@@ -11,7 +12,12 @@ ALL_EMPLOYEES = [
     "Parvej Meman",
     "Chaitrang Prabhu"
 ]
+
 st.title("Management Dashboard")
+
+# =========================
+# DATABASE
+# =========================
 
 conn = sqlite3.connect("tracker.db")
 
@@ -22,15 +28,39 @@ df = pd.read_sql_query(
 
 conn.close()
 
-approved_employees = []
+# =========================
+# DASHBOARD CARDS
+# =========================
+
+today = datetime.today()
+
+busy_employees = []
 
 if not df.empty:
 
-    approved_employees = df[
-        df["status"] == "Approved"
-    ]["employee_name"].unique().tolist()
+    approved_tasks = df[df["status"] == "Approved"]
 
-busy = len(approved_employees)
+    for _, task in approved_tasks.iterrows():
+
+        try:
+
+            end_date = datetime.strptime(
+                str(task["end_date"]),
+                "%Y-%m-%d"
+            )
+
+            if end_date >= today:
+
+                busy_employees.append(
+                    task["employee_name"]
+                )
+
+        except:
+            pass
+
+busy_employees = list(set(busy_employees))
+
+busy = len(busy_employees)
 
 available = len(ALL_EMPLOYEES) - busy
 
@@ -55,33 +85,52 @@ col3.metric(
     pending
 )
 
-st.divider()
+# =========================
+# RESOURCE OVERVIEW
+# =========================
 
-st.subheader("All Requests")
+st.divider()
 
 st.subheader("Resource Overview")
 
-st.dataframe(
-    df[
-        [
-            "employee_name",
-            "employee_type",
-            "project_code",
-            "project_description",
-            "senior_name",
-            "approx_duration",
-            "start_date",
-            "end_date",
-            "status"
-        ]
-    ],
-    use_container_width=True
-)
+if not df.empty:
+
+    st.dataframe(
+        df[
+            [
+                "employee_name",
+                "employee_type",
+                "project_code",
+                "project_description",
+                "senior_name",
+                "approx_duration",
+                "start_date",
+                "end_date",
+                "status"
+            ]
+        ],
+        use_container_width=True
+    )
+
+else:
+
+    st.info("No assignments available.")
+
+# =========================
+# WEEKLY AVAILABILITY MATRIX
+# =========================
+
 st.divider()
 
 st.subheader("Weekly Availability Matrix")
 
-days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+week_dates = []
+
+for i in range(5):
+
+    week_dates.append(
+        today + timedelta(days=i)
+    )
 
 availability_data = []
 
@@ -91,24 +140,46 @@ for employee in ALL_EMPLOYEES:
         "Employee": employee
     }
 
-    employee_busy = False
+    # Default = Available
+    for date_obj in week_dates:
 
+        column_name = date_obj.strftime("%d-%b")
+
+        row[column_name] = "🟢"
+
+    # Check Approved Tasks
     if not df.empty:
 
-        approved_tasks = df[
+        employee_tasks = df[
             (df["employee_name"] == employee)
-            & (df["status"] == "Approved")
+            &
+            (df["status"] == "Approved")
         ]
 
-        if len(approved_tasks) > 0:
-            employee_busy = True
+        for _, task in employee_tasks.iterrows():
 
-    for day in days:
+            try:
 
-        if employee_busy:
-            row[day] = "🔴"
-        else:
-            row[day] = "🟢"
+                start_date = datetime.strptime(
+                    str(task["start_date"]),
+                    "%Y-%m-%d"
+                )
+
+                end_date = datetime.strptime(
+                    str(task["end_date"]),
+                    "%Y-%m-%d"
+                )
+
+                for date_obj in week_dates:
+
+                    if start_date <= date_obj <= end_date:
+
+                        column_name = date_obj.strftime("%d-%b")
+
+                        row[column_name] = "🔴"
+
+            except:
+                pass
 
     availability_data.append(row)
 
