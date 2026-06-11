@@ -40,23 +40,28 @@ if not df.empty:
 
     approved_tasks = df[df["status"] == "Approved"]
 
-    for _, task in approved_tasks.iterrows():
+for _, task in approved_tasks.iterrows():
 
-        try:
+    try:
 
-            end_date = datetime.strptime(
-                str(task["end_date"]),
-                "%Y-%m-%d"
+        start_date = datetime.strptime(
+            str(task["start_date"]),
+            "%Y-%m-%d"
+        ).date()
+
+        end_date = datetime.strptime(
+            str(task["end_date"]),
+            "%Y-%m-%d"
+        ).date()
+
+        if start_date <= today <= end_date:
+
+            busy_employees.append(
+                task["employee_name"]
             )
 
-            if end_date >= today:
-
-                busy_employees.append(
-                    task["employee_name"]
-                )
-
-        except:
-            pass
+    except:
+        pass
 
 busy_employees = list(set(busy_employees))
 
