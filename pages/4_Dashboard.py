@@ -32,7 +32,7 @@ conn.close()
 # DASHBOARD CARDS
 # =========================
 
-today = datetime.today()
+today = datetime.today().date()
 
 busy_employees = []
 
@@ -163,12 +163,12 @@ for employee in ALL_EMPLOYEES:
                 start_date = datetime.strptime(
                     str(task["start_date"]),
                     "%Y-%m-%d"
-                )
+                ).date()
 
                 end_date = datetime.strptime(
                     str(task["end_date"]),
                     "%Y-%m-%d"
-                )
+                ).date()
 
                 for date_obj in week_dates:
 
