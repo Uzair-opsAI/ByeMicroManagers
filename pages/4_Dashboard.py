@@ -1,5 +1,5 @@
 import streamlit as st
-import sqlite3
+from utils.google_sheet import get_assignments
 import pandas as pd
 from datetime import datetime, timedelta
 
@@ -21,14 +21,9 @@ st.title("Management Dashboard")
 # DATABASE
 # =========================
 
-conn = sqlite3.connect("tracker.db")
+# GOOGLE SHEETS
 
-df = pd.read_sql_query(
-    "SELECT * FROM assignments",
-    conn
-)
-
-conn.close()
+df = get_assignments()
 
 # =========================
 # DASHBOARD CARDS
