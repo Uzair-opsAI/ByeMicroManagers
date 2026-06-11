@@ -80,13 +80,9 @@ st.dataframe(
 st.divider()
 
 st.subheader("Weekly Availability Matrix")
-days = [
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri"
-]
+
+days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+
 availability_data = []
 
 for employee in ALL_EMPLOYEES:
@@ -95,12 +91,26 @@ for employee in ALL_EMPLOYEES:
         "Employee": employee
     }
 
+    employee_busy = False
+
+    if not df.empty:
+
+        approved_tasks = df[
+            (df["employee_name"] == employee)
+            & (df["status"] == "Approved")
+        ]
+
+        if len(approved_tasks) > 0:
+            employee_busy = True
+
     for day in days:
-        row[day] = "🟢"
+
+        if employee_busy:
+            row[day] = "🔴"
+        else:
+            row[day] = "🟢"
 
     availability_data.append(row)
-
-# LOOP ENDS HERE
 
 availability_df = pd.DataFrame(
     availability_data
