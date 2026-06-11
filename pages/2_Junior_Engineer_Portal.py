@@ -86,7 +86,7 @@ if st.button("Submit Junior Assignment"):
         end_date,
         status
     )
-    VALUES (?,?,?,?,?,?,?,?,?)
+    VALUES (?,?,?,?,?,?,?,?,?,?)
     """,
     (
         employee_name,
