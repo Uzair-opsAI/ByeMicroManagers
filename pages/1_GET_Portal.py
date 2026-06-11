@@ -62,30 +62,11 @@ if st.button("Submit Task"):
 
     conn = sqlite3.connect("tracker.db")
 
-    cursor = conn.cursor()
-    cursor.execute("PRAGMA table_info(assignments)")
-    columns = cursor.fetchall()
-    
-    st.write("Current Database Columns:")
-    st.write(columns)
-    cursor.execute("""
-    INSERT INTO assignments
-    (
-        employee_name,
-        employee_type,
-        project_code,
-        project_description,
-        senior_name,
-        approx_duration,
-        start_date,
-        end_date,
-        status
-    )
-    VALUES (?,?,?,?,?,?,?,?,?)
-    """,
-    (
+    add_assignment(
+    [
         employee_name,
         "GET",
+        "",
         project_code,
         task_name,
         senior_name,
@@ -93,9 +74,11 @@ if st.button("Submit Task"):
         str(start_date),
         str(end_date),
         "Pending"
-    ))
+    ]
+)
 
-    conn.commit()
-    conn.close()
+st.success(
+    "Assignment Submitted"
+)
 
     st.success("Assignment Submitted")
