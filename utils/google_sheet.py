@@ -25,8 +25,6 @@ sheet = client.open(
 def add_assignment(data):
 
     sheet.append_row(data)
-
-    print("ROW WRITTEN:", data)
 def get_assignments():
 
     records = sheet.get_all_records()
