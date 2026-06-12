@@ -24,6 +24,10 @@ st.title("Management Dashboard")
 # GOOGLE SHEETS
 
 df = get_assignments()
+if df.empty:
+    st.warning("No assignments found")
+    st.stop()
+    st.write(df.columns.tolist())
 # =========================
 # DASHBOARD CARDS
 # =========================
