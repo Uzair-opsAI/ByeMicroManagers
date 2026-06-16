@@ -22,7 +22,8 @@ SENIORS = [
     "Rintu Midday",
     "Nakul Bhatt",
     "Kaustubh Soman",
-    "Parth Shah"
+    "Parth Shah",
+    "Dhaval Mehta"
 ]
 
 employee_name = st.selectbox(
