@@ -1,7 +1,7 @@
 import streamlit as st
 from utils.google_sheet import add_assignment
 
-st.title("Junior Engineer Portal")
+st.title("Engineer Portal")
 
 JUNIORS = [
     "Nayaabshaad Ansari",
@@ -26,7 +26,7 @@ SENIORS = [
 ]
 
 employee_name = st.selectbox(
-    "Junior Engineer Name",
+    "Engineer Name",
     JUNIORS
 )
 
@@ -66,12 +66,12 @@ end_date = st.date_input(
     "End Date"
 )
 
-if st.button("Submit Junior Assignment"):
+if st.button("Submit Assignment"):
 
     add_assignment(
         [
             employee_name,
-            "Junior Engineer",
+            "Engineer",
             work_allocation_status,
             project_code,
             task_name,
