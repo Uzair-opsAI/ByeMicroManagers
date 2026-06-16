@@ -94,10 +94,6 @@ col3.metric(
 # RESOURCE OVERVIEW
 # =========================
 
-# =========================
-# RESOURCE OVERVIEW
-# =========================
-
 st.divider()
 
 st.subheader("Resource Overview")
