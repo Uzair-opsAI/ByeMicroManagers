@@ -19,5 +19,5 @@ st.subheader(
 )
 
 st.info(
-    "Use the menu on the left to access Junior Portal, Senior Portal and Dashboard."
+    "Use the menu on the left to access GET, Engineer, Senior Portal and Dashboard."
 )
