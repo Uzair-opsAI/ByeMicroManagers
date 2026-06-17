@@ -65,27 +65,29 @@ end_date = st.date_input(
 if st.button("Submit Task"):
 
     try:
-status = "Pending"
 
-if senior_name == "Mumbai Office":
-    status = "Approved"
+        status = "Pending"
+
+        if senior_name == "Mumbai Office":
+            status = "Approved"
+
         add_assignment(
-    [
-        employee_name,
-        "GET",
-        "",
-        project_code,
-        task_name,
-        senior_name,
-        approx_duration,
-        str(start_date),
-        str(end_date),
-        status
-        ]
-    )
+            [
+                employee_name,
+                "GET",
+                "",
+                project_code,
+                task_name,
+                senior_name,
+                approx_duration,
+                str(start_date),
+                str(end_date),
+                status
+            ]
+        )
 
         st.success("Assignment Submitted")
 
     except Exception as e:
 
-        st.error(str(e))
+        st.error(f"Error: {e}")
