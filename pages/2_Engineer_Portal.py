@@ -24,7 +24,8 @@ SENIORS = [
     "Kaustubh Soman",
     "Parth Shah",
     "Dhaval Mehta",
-    "Amrita Shah"
+    "Amrita Shah",
+    "Mumbai Office"
 ]
 
 employee_name = st.selectbox(
@@ -67,9 +68,11 @@ start_date = st.date_input(
 end_date = st.date_input(
     "End Date"
 )
+status = "Pending"
 
 if st.button("Submit Assignment"):
-
+    if senior_name == "Mumbai Office":
+    status = "Approved"
     add_assignment(
         [
             employee_name,
