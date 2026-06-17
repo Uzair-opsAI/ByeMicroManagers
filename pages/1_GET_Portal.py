@@ -25,7 +25,8 @@ SENIORS = [
     "Kaustubh Soman",
     "Parth Shah",
     "Dhaval Mehta",
-    "Amrita Shah"
+    "Amrita Shah",
+    "Mumbai Office"
 ]
 
 employee_name = st.selectbox(
@@ -64,21 +65,24 @@ end_date = st.date_input(
 if st.button("Submit Task"):
 
     try:
+status = "Pending"
 
+if senior_name == "Mumbai Office":
+    status = "Approved"
         add_assignment(
-            [
-                employee_name,
-                "GET",
-                "",
-                project_code,
-                task_name,
-                senior_name,
-                approx_duration,
-                str(start_date),
-                str(end_date),
-                "Pending"
-            ]
-        )
+    [
+        employee_name,
+        "GET",
+        "",
+        project_code,
+        task_name,
+        senior_name,
+        approx_duration,
+        str(start_date),
+        str(end_date),
+        status
+        ]
+    )
 
         st.success("Assignment Submitted")
 
