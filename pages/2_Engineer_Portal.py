@@ -68,11 +68,14 @@ start_date = st.date_input(
 end_date = st.date_input(
     "End Date"
 )
-status = "Pending"
 
 if st.button("Submit Assignment"):
+
+    status = "Pending"
+
     if senior_name == "Mumbai Office":
-    status = "Approved"
+        status = "Approved"
+
     add_assignment(
         [
             employee_name,
@@ -84,7 +87,7 @@ if st.button("Submit Assignment"):
             approx_duration,
             str(start_date),
             str(end_date),
-            "Pending"
+            status
         ]
     )
 
