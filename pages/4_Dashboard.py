@@ -240,6 +240,10 @@ for employee in ALL_EMPLOYEES:
                 pass
         
             availability_data.append(row)
+st.write("Employees in matrix")
+
+for item in availability_data:
+st.write(item["Employee"])
 availability_df = pd.DataFrame(
     availability_data
 )
