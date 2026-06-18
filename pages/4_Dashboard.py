@@ -133,7 +133,17 @@ else:
 # =========================
 
 st.divider()
+st.markdown("""
+### Legend
 
+🟢 Available
+
+🔴 Busy (Approved Assignment)
+
+🔵 Busy (Work Hours Assigned)
+
+🟠 Busy (Work Hours Not Assigned)
+""")
 st.subheader("Weekly Availability Matrix")
 
 week_dates = []
@@ -157,45 +167,64 @@ for employee in ALL_EMPLOYEES:
     # Default = Available
     for date_obj in week_dates:
 
-        column_name = date_obj.strftime("%a %d-%b")
+    column_name = date_obj.strftime("%a %d-%b")
 
-        row[column_name] = "🟢"
+    row[column_name] = "🟢"
 
-    # Check Approved Tasks
-    if not df.empty:
+# Check Approved Tasks
+if not df.empty:
 
-        employee_tasks = df[
-            (df["employee_name"] == employee)
-            &
-            (df["status"] == "Approved")
-        ]
+    employee_tasks = df[
+        (df["employee_name"] == employee)
+        &
+        (df["status"] == "Approved")
+    ]
 
-        for _, task in employee_tasks.iterrows():
+    for _, task in employee_tasks.iterrows():
 
-            try:
+        try:
 
-                start_date = datetime.strptime(
-                    str(task["start_date"]),
-                    "%Y-%m-%d"
-                ).date()
+            start_date = datetime.strptime(
+                str(task["start_date"]),
+                "%Y-%m-%d"
+            ).date()
 
-                end_date = datetime.strptime(
-                    str(task["end_date"]),
-                    "%Y-%m-%d"
-                ).date()
+            end_date = datetime.strptime(
+                str(task["end_date"]),
+                "%Y-%m-%d"
+            ).date()
 
-                for date_obj in week_dates:
+            work_hours = str(
+                task.get(
+                    "work_hours_assigned",
+                    ""
+                )
+            ).strip()
 
-                    if start_date <= date_obj <= end_date:
+            for date_obj in week_dates:
 
-                        column_name = date_obj.strftime("%a %d-%b")
+                if start_date <= date_obj <= end_date:
+
+                    column_name = date_obj.strftime(
+                        "%a %d-%b"
+                    )
+
+                    if work_hours == "Assigned":
+
+                        row[column_name] = "🔵"
+
+                    elif work_hours == "Not Assigned":
+
+                        row[column_name] = "🟠"
+
+                    else:
 
                         row[column_name] = "🔴"
 
-            except:
-                pass
+        except:
+            pass
 
-    availability_data.append(row)
+availability_data.append(row)
 
 availability_df = pd.DataFrame(
     availability_data
