@@ -237,7 +237,7 @@ for employee in ALL_EMPLOYEES:
             except:
                 pass
         
-            availability_data.append(row)
+                availability_data.append(row)
 availability_df = pd.DataFrame(
     availability_data
 )
