@@ -219,7 +219,7 @@ for employee in ALL_EMPLOYEES:
                         # GET Logic
                         if employee_type == "GET":
         
-                            row[column_name] = "🔴"
+                            row[column_name] = "🟠"
         
                         # Engineer Logic
                         else:
@@ -232,9 +232,7 @@ for employee in ALL_EMPLOYEES:
         
                                 row[column_name] = "🔴"
         
-                            else:
-        
-                                row[column_name] = "🟠"
+
         
             except:
                 pass
