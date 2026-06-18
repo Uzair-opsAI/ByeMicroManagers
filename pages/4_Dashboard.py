@@ -231,16 +231,18 @@ for employee in ALL_EMPLOYEES:
                             elif work_hours == "Not Assigned":
         
                                 row[column_name] = "🔴"
-        
+                            else:
+    
+                                row[column_name] = "🟠"
 
         
             except:
                 pass
         
             availability_data.append(row)
-    availability_df = pd.DataFrame(
-        availability_data
-    )
+availability_df = pd.DataFrame(
+    availability_data
+)
 
 availability_df.index = range(
     1,
