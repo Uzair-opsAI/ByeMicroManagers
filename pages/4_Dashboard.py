@@ -181,66 +181,65 @@ for employee in ALL_EMPLOYEES:
         ]
     
         for _, task in employee_tasks.iterrows():
-    
-            try:
-    
-                start_date = datetime.strptime(
-                    str(task["start_date"]),
-                    "%Y-%m-%d"
-                ).date()
-    
-                end_date = datetime.strptime(
-                    str(task["end_date"]),
-                    "%Y-%m-%d"
-                ).date()
-    
-                employee_type = str(
-    task.get(
-        "employee_type",
-        ""
-    )
-).strip()
 
-work_hours = str(
-    task.get(
-        "work_hours_assigned",
-        ""
-    )
-).strip()
-    
-    for date_obj in week_dates:
-    
-        if start_date <= date_obj <= end_date:
-    
-            column_name = date_obj.strftime(
-                "%a %d-%b"
+    try:
+
+        start_date = datetime.strptime(
+            str(task["start_date"]),
+            "%Y-%m-%d"
+        ).date()
+
+        end_date = datetime.strptime(
+            str(task["end_date"]),
+            "%Y-%m-%d"
+        ).date()
+
+        employee_type = str(
+            task.get(
+                "employee_type",
+                ""
             )
-    
-            # GET Logic
-            if employee_type == "GET":
-    
-                row[column_name] = "🔴"
-    
-            # Engineer Logic
-            else:
-    
-                if work_hours == "Assigned":
-    
-                    row[column_name] = "🔵"
-    
-                elif work_hours == "Not Assigned":
-    
+        ).strip()
+
+        work_hours = str(
+            task.get(
+                "work_hours_assigned",
+                ""
+            )
+        ).strip()
+
+        for date_obj in week_dates:
+
+            if start_date <= date_obj <= end_date:
+
+                column_name = date_obj.strftime(
+                    "%a %d-%b"
+                )
+
+                # GET Logic
+                if employee_type == "GET":
+
                     row[column_name] = "🔴"
-    
+
+                # Engineer Logic
                 else:
-    
-                    row[column_name] = "🟠"
-    
+
+                    if work_hours == "Assigned":
+
+                        row[column_name] = "🔵"
+
+                    elif work_hours == "Not Assigned":
+
+                        row[column_name] = "🔴"
+
+                    else:
+
+                        row[column_name] = "🟠"
+
     except:
         pass
-    
-    availability_data.append(row)
 
+    availability_data.append(row)
 availability_df = pd.DataFrame(
     availability_data
 )
