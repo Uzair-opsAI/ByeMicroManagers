@@ -138,11 +138,11 @@ st.markdown("""
 
 🟢 Available
 
-🔴 Busy (Approved Assignment)
+🔴 Work Allocated Without Hours
 
-🔵 Busy (Work Hours Assigned)
+🔵 Work Allocated With Hours
 
-🟠 Busy (Work Hours Not Assigned)
+🟠 Work Allocated (Hours-N/A)
 """)
 st.subheader("Weekly Availability Matrix")
 
@@ -194,32 +194,47 @@ for employee in ALL_EMPLOYEES:
                     "%Y-%m-%d"
                 ).date()
     
-                work_hours = str(
-                    task.get(
-                        "work_hours_assigned",
-                        ""
-                    )
-                ).strip()
-    
-                for date_obj in week_dates:
-    
-                    if start_date <= date_obj <= end_date:
-    
-                        column_name = date_obj.strftime(
-                            "%a %d-%b"
-                        )
-    
-                        if work_hours == "Assigned":
-    
-                            row[column_name] = "🔵"
-    
-                        elif work_hours == "Not Assigned":
-    
-                            row[column_name] = "🟠"
-    
-                        else:
-    
-                            row[column_name] = "🔴"
+                employee_type = str(
+    task.get(
+        "employee_type",
+        ""
+    )
+).strip()
+
+work_hours = str(
+    task.get(
+        "work_hours_assigned",
+        ""
+    )
+).strip()
+
+for date_obj in week_dates:
+
+    if start_date <= date_obj <= end_date:
+
+        column_name = date_obj.strftime(
+            "%a %d-%b"
+        )
+
+        # GET Logic
+        if employee_type == "GET":
+
+            row[column_name] = "🔴"
+
+        # Engineer Logic
+        else:
+
+            if work_hours == "Assigned":
+
+                row[column_name] = "🔵"
+
+            elif work_hours == "Not Assigned":
+
+                row[column_name] = "🔴"
+
+            else:
+
+                row[column_name] = "🟠"
     
             except:
                 pass
