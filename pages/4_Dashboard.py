@@ -226,16 +226,16 @@ for employee in ALL_EMPLOYEES:
     
     availability_data.append(row)
     
-    availability_df = pd.DataFrame(
-        availability_data
-    )
-    
-    availability_df.index = range(
-        1,
-        len(availability_df) + 1
-    )
-    
-    st.dataframe(
-        availability_df,
-        use_container_width=True
-    )
+availability_df = pd.DataFrame(
+    availability_data
+)
+
+availability_df.index = range(
+    1,
+    len(availability_df) + 1
+)
+
+st.dataframe(
+    availability_df,
+    use_container_width=True
+)
