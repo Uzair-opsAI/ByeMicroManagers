@@ -12,7 +12,10 @@ ALL_EMPLOYEES = [
     "Nayaabshaad Ansari",
     "Nandini Jadav",
     "Parvej Meman",
-    "Chaitrang Prabhu"
+    "Chaitrang Prabhu",
+    "Nikhil Padvi",
+    "Nisha Prajapati",
+    "Dharmendra Gohil"
 ]
 
 st.title("Management Dashboard")
