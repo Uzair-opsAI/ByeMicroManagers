@@ -235,12 +235,12 @@ for date_obj in week_dates:
             else:
 
                 row[column_name] = "🟠"
-    
-            except:
-                pass
-    
-    availability_data.append(row)
-    
+
+except:
+    pass
+
+availability_data.append(row)
+
 availability_df = pd.DataFrame(
     availability_data
 )
