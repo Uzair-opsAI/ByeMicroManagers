@@ -207,39 +207,39 @@ work_hours = str(
         ""
     )
 ).strip()
-
-for date_obj in week_dates:
-
-    if start_date <= date_obj <= end_date:
-
-        column_name = date_obj.strftime(
-            "%a %d-%b"
-        )
-
-        # GET Logic
-        if employee_type == "GET":
-
-            row[column_name] = "🔴"
-
-        # Engineer Logic
-        else:
-
-            if work_hours == "Assigned":
-
-                row[column_name] = "🔵"
-
-            elif work_hours == "Not Assigned":
-
+    
+    for date_obj in week_dates:
+    
+        if start_date <= date_obj <= end_date:
+    
+            column_name = date_obj.strftime(
+                "%a %d-%b"
+            )
+    
+            # GET Logic
+            if employee_type == "GET":
+    
                 row[column_name] = "🔴"
-
+    
+            # Engineer Logic
             else:
-
-                row[column_name] = "🟠"
-
-except:
-    pass
-
-availability_data.append(row)
+    
+                if work_hours == "Assigned":
+    
+                    row[column_name] = "🔵"
+    
+                elif work_hours == "Not Assigned":
+    
+                    row[column_name] = "🔴"
+    
+                else:
+    
+                    row[column_name] = "🟠"
+    
+    except:
+        pass
+    
+    availability_data.append(row)
 
 availability_df = pd.DataFrame(
     availability_data
