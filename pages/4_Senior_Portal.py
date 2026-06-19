@@ -51,7 +51,9 @@ else:
         st.write(
             f"Senior: {row['senior_name']}"
         )
-
+        st.write(
+            f"Work Hours Assigned: {row['work_hours_assigned']}"
+        )
         st.write(
             f"Duration: {row['approx_duration']} Hours"
         )
